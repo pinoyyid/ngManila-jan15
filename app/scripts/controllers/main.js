@@ -1,18 +1,14 @@
+/// <reference path="../../../tsdefs/angularjs/angular.d.ts"/>
 'use strict';
-
-/**
- * @ngdoc function
- * @name ngtodoApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the ngtodoApp
- */
-angular.module('ngtodoApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.sig="MainCtrl";
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+var MainCtrl = (function () {
+    function MainCtrl($scope) {
+        this.sig = 'MainCtrl'; // I always do this to help debugging DI
+        $scope.vmm = this; // thus {{vmm.sig}} within the HTML
+    }
+    MainCtrl.prototype.aSimpleFunction = function () {
+        return "foo";
+    };
+    MainCtrl.$inject = ['$scope']; // allows safe minification
+    return MainCtrl;
+})();
+angular.module('ngtodoApp').controller('MainCtrl', MainCtrl);
