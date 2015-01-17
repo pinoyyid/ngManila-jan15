@@ -1,18 +1,22 @@
 'use strict';
 
-describe('Service: Datamodel', function () {
+describe('Service: Data', function () {
 
   // load the service's module
   beforeEach(module('ngtodoApp'));
 
   // instantiate service
-  var Datamodel;
-  beforeEach(inject(function (_Datamodel_) {
-    Datamodel = _Datamodel_;
+  var Data;
+  beforeEach(inject(function (_Data_) {
+    Data= _Data_;
   }));
 
-  it('should do something', function () {
-    expect(!!Datamodel).toBe(true);
+  it('should be instantiated', function () {
+    expect(!!Data).toBe(true);
+  });
+
+  it('should have the correct sig', function () {
+    expect(Data.sig).toBe('Data');
   });
 
 });

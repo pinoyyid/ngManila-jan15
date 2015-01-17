@@ -4,12 +4,9 @@
 
 
 class Data {
+	sig = 'Data';
 	allTodoItemsArray:Array<Todo> = [];
 	allTodoItemsMap:{id:number; todoItem:Todo};
-
-	constructor() {
-	// populate the data model, eg from a REST service or from local storage (or both)
-	}
 }
 
 angular.module('ngtodoApp')

@@ -3,8 +3,8 @@
 'use strict';
 var Data = (function () {
     function Data() {
+        this.sig = 'Data';
         this.allTodoItemsArray = [];
-        // populate the data model, eg from a REST service or from local storage (or both)
     }
     return Data;
 })();
