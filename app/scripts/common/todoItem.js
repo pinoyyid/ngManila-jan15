@@ -4,7 +4,13 @@
 */
 var Todo = (function () {
     function Todo() {
-        this.complete = false;
     }
+    /**
+    * returns true if the todo item is complete
+    * @return complete boolean
+    */
+    Todo.prototype.isComplete = function () {
+        return !!this.dateCompleted;
+    };
     return Todo;
 })();

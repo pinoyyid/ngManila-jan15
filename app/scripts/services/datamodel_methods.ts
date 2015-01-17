@@ -6,8 +6,9 @@
 /**
 * A class containing all of the method which operate on the Todo data model
 */
-class TodoMethods {
+class DMMethods {
 	
+	sig = 'DMMethods';
 	datamodel:Data;					// the in-memory data model
 
 	static $inject = ['Data'];			// Angular will inject the Data model service
@@ -35,7 +36,22 @@ class TodoMethods {
 	*/
 	markTodoAsComplete(todoItem:Todo) {
 		todoItem.dateCompleted = new Date().toISOString();
-		todoItem.complete = true;
+	}
+
+
+	/**
+	* Return an array of incomplete Todo items
+	* @return Array<Todo>
+	*/
+	getAllIncompleteTodos():Array<Todo> {
+		var itArray = [];
+		for (var i=0; i < this.datamodel.allTodoItemsArray.length; i++) {
+			var todo = this.datamodel.allTodoItemsArray[i];
+			if (!todo.isComplete()) {
+				itArray.push(todo);
+			}
+		}
+		return itArray;
 	}
 
 
@@ -43,4 +59,4 @@ class TodoMethods {
 }
 
 angular.module('ngtodoApp')
-  .service('TodoMethods', TodoMethods);
+  .service('DMMethods', DMMethods);

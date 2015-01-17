@@ -8,6 +8,13 @@ class Todo {
 	id: 		number;
 	dateCreated: 	string;				// ISO 8601
 	title: 		string;
-	complete = false;
-	dateCompleted:	string;				// undefined for an incomplete Todo item
+	dateCompleted:	string;				// undefined for an incomplete Todo item. Good idea??
+
+	/**
+	* returns true if the todo item is complete
+	* @return complete boolean
+	*/
+	isComplete():boolean {				// seems superfluous right now??
+		return !!this.dateCompleted;
+	}
 }

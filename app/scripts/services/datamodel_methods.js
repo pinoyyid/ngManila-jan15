@@ -5,16 +5,17 @@
 /**
 * A class containing all of the method which operate on the Todo data model
 */
-var TodoMethods = (function () {
-    function TodoMethods(Data) {
-        this.datamodel = Data; // store the reference
+var DMMethods = (function () {
+    function DMMethods(Data) {
+        this.sig = 'DMMethods';
+        this.datamodel = Data; // store the reference to the data model
     }
     /**
     * Create a new todo item
     * @param title  the title of the new item
     * @return the newly created todo item
     */
-    TodoMethods.prototype.newTodo = function (title) {
+    DMMethods.prototype.newTodo = function (title) {
         var newTodo = new Todo();
         newTodo.id = new Date().valueOf();
         newTodo.title = title;
@@ -26,11 +27,24 @@ var TodoMethods = (function () {
     * Mark a todo item as being complete
     * @param Todo item
     */
-    TodoMethods.prototype.markTodoAsComplete = function (todoItem) {
+    DMMethods.prototype.markTodoAsComplete = function (todoItem) {
         todoItem.dateCompleted = new Date().toISOString();
-        todoItem.complete = true;
     };
-    TodoMethods.$inject = ['Data']; // Angular will inject the Data model service
-    return TodoMethods;
+    /**
+    * Return an array of incomplete Todo items
+    * @return Array<Todo>
+    */
+    DMMethods.prototype.getAllIncompleteTodos = function () {
+        var itArray = [];
+        for (var i = 0; i < this.datamodel.allTodoItemsArray.length; i++) {
+            var todo = this.datamodel.allTodoItemsArray[i];
+            if (!todo.isComplete()) {
+                itArray.push(todo);
+            }
+        }
+        return itArray;
+    };
+    DMMethods.$inject = ['Data']; // Angular will inject the Data model service
+    return DMMethods;
 })();
-angular.module('ngtodoApp').service('TodoMethods', TodoMethods);
+angular.module('ngtodoApp').service('DMMethods', DMMethods);
