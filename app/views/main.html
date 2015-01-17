@@ -1,9 +1,9 @@
-<div class="Zjumbotron">
+<div>
 	<h1>Incomplete Todo Items</h1>
 	{{Zvmm}}
 	<div style="azimuth:" ng-repeat="todo in vmm.dm.getAllIncompleteTodos()">
 		<div>
-			<input type='checkbox' ng-bind="todo.isComplete()" ng-click="vmm.todoClicked(todo)"/>
+			<input type='checkbox' ng-click="vmm.todoClicked(todo)"/>
 			{{todo.title}}
 		</div>
 	</div>
@@ -11,5 +11,4 @@
 		<input type="text" placeholder="new Todo" ng-model="vmm.newTitle"/>
 		<button class="btn-primary btn-small"ng-click="vmm.newTodo()">Save</button>
 	</div>
-
 </div>
