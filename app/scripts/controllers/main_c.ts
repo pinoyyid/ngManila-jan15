@@ -1,5 +1,5 @@
 /// <reference path="../../../tsdefs/angularjs/angular.d.ts"/>
-/// <reference path="../services/datamodel_methods.ts"/>
+/// <reference path="../services/datamodel_methods_s.ts"/>
 
 'use strict';
 
@@ -17,14 +17,21 @@ class MainCtrl implements IMainCtrl {
 
 	newTitle = '';
 
-	static $inject = ['$scope', 'DMMethods'];		// allows safe minification
+	/*
+	this commented out code is the 'old' method, ie. not using controller as
+
+
+	static $inject = ['$scope', 'DMMethods'];	// allows safe minification
 	constructor($scope,DMMethods) {
-		$scope.vmm = this;			// thus {{vmm.sig}} within the HTML
+	$scope.vmm = this;				// thus {{vmm.sig}} within the HTML
+	*/
+
+	static $inject = ['DMMethods'];			// allows safe minification
+	constructor(DMMethods) {
 		this.dm = DMMethods;
 	}
 
 	todoClicked(todo:Todo):void {
-		console.log(todo.title +" is now complete");
 		this.dm.markTodoAsComplete(todo);
 	}
 

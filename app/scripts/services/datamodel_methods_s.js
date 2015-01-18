@@ -1,6 +1,6 @@
 /// <reference path="../../../tsdefs/angularjs/angular.d.ts"/>
 /// <reference path="../common/todoItem.ts"/>
-/// <reference path="./datamodel.ts"/>
+/// <reference path="./datamodel_s.ts"/>
 'use strict';
 /**
 * A class containing all of the method which operate on the Todo data model

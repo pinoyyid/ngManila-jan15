@@ -21,19 +21,7 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .when('/myroute', {
-        templateUrl: 'views/myroute.html',
-        controller: 'MyrouteCtrl'
-      })
-      .when('/myroute', {
-        templateUrl: 'views/myroute.html',
-        controller: 'MyrouteCtrl'
+        controller: 'MainCtrl as vmm'
       })
       .otherwise({
         redirectTo: '/'
