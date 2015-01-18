@@ -4,7 +4,7 @@
 *   The definition of the Todo object that will be used throughout the app
 */
 
-module  Todo {
+module  Todo {						// each class is defined within the Todo module
   export class Todo {
 	id: 		number;
 	dateCreated: 	string;				// ISO 8601
