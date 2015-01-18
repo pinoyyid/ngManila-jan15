@@ -53,13 +53,20 @@ module  Todo {
 		var itArray = [];
 		for (var i=0; i < this.datamodel.allTodoItemsArray.length; i++) {
 			var todo = this.datamodel.allTodoItemsArray[i];
-			if (!todo.isComplete()) {
+			if (!this.isComplete(todo)) {
 				itArray.push(todo);
 			}
 		}
 		return itArray;
 	}
 
+
+	/**
+	* return truthy if the Todo item is complete
+	*/
+	isComplete(todo:Todo):boolean {		
+		return !!todo.dateCompleted;
+	}
 
 	// delete Todo,  etc
  }

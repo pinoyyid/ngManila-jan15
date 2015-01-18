@@ -7,13 +7,6 @@ var Todo;
     var Todo = (function () {
         function Todo() {
         }
-        /**
-        * returns true if the todo item is complete
-        * @return complete boolean
-        */
-        Todo.prototype.isComplete = function () {
-            return !!this.dateCompleted;
-        };
         return Todo;
     })();
     _Todo.Todo = Todo;

@@ -40,11 +40,17 @@ var Todo;
             var itArray = [];
             for (var i = 0; i < this.datamodel.allTodoItemsArray.length; i++) {
                 var todo = this.datamodel.allTodoItemsArray[i];
-                if (!todo.isComplete()) {
+                if (!this.isComplete(todo)) {
                     itArray.push(todo);
                 }
             }
             return itArray;
+        };
+        /**
+        * return truthy if the Todo item is complete
+        */
+        DMMethods.prototype.isComplete = function (todo) {
+            return !!todo.dateCompleted;
         };
         DMMethods.$inject = ['Data']; // Angular will inject the Data model service
         return DMMethods;
