@@ -5,18 +5,17 @@
 
 module  Todo {
   export class Data {
-	sig = 'Data';
-	allTodoItemsArray:Array<Todo.Todo> = [];
-	allTodoItemsMap = {};
+	sig = 'Data';				// I always do this to help debugging DI, and as my first test
+	allTodoItemsArray:Array<Todo> = [];	// all Todo items, as an array
+	allTodoItemsMap = {};			// all Todo items as a map, keyed by ID
 
 	constructor() {
-	var t;
-	t = new Todo(); t.title = 'title 1'; this.allTodoItemsArray.push(t);
-	t = new Todo(); t.title = 'title 2'; this.allTodoItemsArray.push(t);
-	t = new Todo(); t.title = 'title 3'; this.allTodoItemsArray.push(t);
-	t = new Todo(); t.title = 'title 4'; this.allTodoItemsArray.push(t);
-
-
+		// load some test data
+		var t;
+		t = new Todo(); t.title = 'title 1'; this.allTodoItemsArray.push(t);
+		t = new Todo(); t.title = 'title 2'; this.allTodoItemsArray.push(t);
+		t = new Todo(); t.title = 'title 3'; this.allTodoItemsArray.push(t);
+		t = new Todo(); t.title = 'title 4'; this.allTodoItemsArray.push(t);
 	}
   }
 }

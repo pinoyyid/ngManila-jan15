@@ -9,7 +9,7 @@ var Todo;
     */
     var DMMethods = (function () {
         function DMMethods(Data) {
-            this.sig = 'DMMethods';
+            this.sig = 'DMMethods'; // I always do this to help debugging DI, and as my first test
             this.datamodel = Data; // store the reference to the data model
         }
         /**

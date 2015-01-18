@@ -9,13 +9,15 @@ module  Todo {
 */
   export class DMMethods {
 	
-	sig = 'DMMethods';
+	sig = 'DMMethods';				// I always do this to help debugging DI, and as my first test
 	datamodel:Data;					// the in-memory data model
 
 	static $inject = ['Data'];			// Angular will inject the Data model service
 	constructor(Data) {
 		this.datamodel = Data;			// store the reference to the data model
 	}
+
+
 	
 	/**
 	* Create a new todo item
@@ -31,6 +33,8 @@ module  Todo {
 		return newTodo;
 	}
 
+
+
 	/**
 	* Mark a todo item as being complete
 	* @param Todo item
@@ -38,6 +42,7 @@ module  Todo {
 	markTodoAsComplete(todoItem:Todo) {
 		todoItem.dateCompleted = new Date().toISOString();
 	}
+
 
 
 	/**

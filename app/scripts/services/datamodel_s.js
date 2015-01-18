@@ -5,9 +5,10 @@ var Todo;
 (function (Todo) {
     var Data = (function () {
         function Data() {
-            this.sig = 'Data';
-            this.allTodoItemsArray = [];
-            this.allTodoItemsMap = {};
+            this.sig = 'Data'; // I always do this to help debugging DI, and as my first test
+            this.allTodoItemsArray = []; // all Todo items, as an array
+            this.allTodoItemsMap = {}; // all Todo items as a map, keyed by ID
+            // load some test data
             var t;
             t = new Todo.Todo();
             t.title = 'title 1';
