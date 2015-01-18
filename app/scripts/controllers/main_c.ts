@@ -13,7 +13,7 @@ interface IMainCtrl {
 
 class MainCtrl implements IMainCtrl {
 	sig = 'MainCtrl';				// I always do this to help debugging DI, and as my first test
-	dm:DMMethods;
+	dm:DMMethods;					// a reference to the DataModel Methods service
 
 	newTitle = '';
 
@@ -27,14 +27,20 @@ class MainCtrl implements IMainCtrl {
 	*/
 
 	static $inject = ['DMMethods'];			// allows safe minification
-	constructor(DMMethods) {
-		this.dm = DMMethods;
+	constructor(DMMethods) {			// NB. no $scope
+	this.dm = DMMethods;				// store a reference to the DataModel Methods service
 	}
 
+	/**
+	* called when the complete checkbox is ticked
+	*/
 	todoClicked(todo:Todo):void {
 		this.dm.markTodoAsComplete(todo);
 	}
 
+	/**
+	* called when the save button is pressed
+	*/
 	newTodo() {
 		this.dm.newTodo(this.newTitle);
 		this.newTitle = '';

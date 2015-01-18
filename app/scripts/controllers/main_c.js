@@ -5,11 +5,17 @@ var MainCtrl = (function () {
     function MainCtrl(DMMethods) {
         this.sig = 'MainCtrl'; // I always do this to help debugging DI, and as my first test
         this.newTitle = '';
-        this.dm = DMMethods;
+        this.dm = DMMethods; // store a reference to the DataModel Methods service
     }
+    /**
+    * called when the complete checkbox is ticked
+    */
     MainCtrl.prototype.todoClicked = function (todo) {
         this.dm.markTodoAsComplete(todo);
     };
+    /**
+    * called when the save button is pressed
+    */
     MainCtrl.prototype.newTodo = function () {
         this.dm.newTodo(this.newTitle);
         this.newTitle = '';
