@@ -4,7 +4,8 @@
 *   The definition of the Todo object that will be used throughout the app
 */
 
-class Todo {
+module  Todo {
+  export class Todo {
 	id: 		number;
 	dateCreated: 	string;				// ISO 8601
 	title: 		string;
@@ -17,4 +18,5 @@ class Todo {
 	isComplete():boolean {				// seems superfluous right now??
 		return !!this.dateCompleted;
 	}
+  }
 }

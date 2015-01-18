@@ -3,10 +3,11 @@
 /// <reference path="./datamodel_s.ts"/>
 'use strict';
 
+module  Todo {
 /**
 * A class containing all of the method which operate on the Todo data model
 */
-class DMMethods {
+  export class DMMethods {
 	
 	sig = 'DMMethods';
 	datamodel:Data;					// the in-memory data model
@@ -56,7 +57,8 @@ class DMMethods {
 
 
 	// delete Todo,  etc
+ }
 }
 
 angular.module('ngtodoApp')
-  .service('DMMethods', DMMethods);
+  .service('DMMethods', Todo.DMMethods);

@@ -3,15 +3,17 @@
 
 'use strict';
 
+
+module  Todo {
 // Optional. Defines the contract between JS and HTML
-interface IMainCtrl {
+  interface IMainCtrl {
 	sig:string;					// [provide info for HTML designer here] eg...
 	todoClicked:(todo:Todo)=>void;			// click event for the complete checkbox
 	newTitle:string;				// input text for new todo item title
-}
+  }
 
 
-class MainCtrl implements IMainCtrl {
+  export class MainCtrl implements IMainCtrl {
 	sig = 'MainCtrl';				// I always do this to help debugging DI, and as my first test
 	dm:DMMethods;					// a reference to the DataModel Methods service
 
@@ -45,6 +47,7 @@ class MainCtrl implements IMainCtrl {
 		this.dm.newTodo(this.newTitle);
 		this.newTitle = '';
 	}
-
+  }
 }
-angular.module('ngtodoApp').controller('MainCtrl',MainCtrl)
+
+angular.module('ngtodoApp').controller('MainCtrl',Todo.MainCtrl)

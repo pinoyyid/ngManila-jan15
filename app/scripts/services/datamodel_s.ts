@@ -3,9 +3,10 @@
 'use strict';
 
 
-class Data {
+module  Todo {
+  export class Data {
 	sig = 'Data';
-	allTodoItemsArray:Array<Todo> = [];
+	allTodoItemsArray:Array<Todo.Todo> = [];
 	allTodoItemsMap = {};
 
 	constructor() {
@@ -17,8 +18,8 @@ class Data {
 
 
 	}
-
+  }
 }
 
 angular.module('ngtodoApp')
-  .service('Data', Data);
+  .service('Data', Todo.Data);
