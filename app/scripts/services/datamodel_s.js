@@ -8,7 +8,7 @@ var Todo;
             this.sig = 'Data'; // I always do this to help debugging DI, and as my first test
             this.allTodoItemsArray = []; // all Todo items, as an array
             this.allTodoItemsMap = {}; // all Todo items as a map, keyed by ID
-            // load some test data
+            // load some test data. In a real world app, there would be mock versions of this class
             var t;
             t = new Todo.Todo();
             t.title = 'title 1';

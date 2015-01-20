@@ -1,0 +1,14 @@
+{
+    "name": "ext.cloud9-typescript",
+    "version": "0.0.1",
+    "main": "cloud9-typescript-ext.js",
+    "private": true,
+    "plugin": {
+        "provides": [
+            "ext.cloud9-typescript"
+        ],
+        "consumes": [
+            "client-plugins"
+        ]
+    }
+}
