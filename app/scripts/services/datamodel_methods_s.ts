@@ -8,7 +8,6 @@ module  Todo {
 * A class containing all of the method which operate on the Todo data model
 */
   export class DMMethods {
-	
 	sig = 'DMMethods';				// I always do this to help debugging DI, and as my first test
 	datamodel:Data;					// the in-memory data model
 
