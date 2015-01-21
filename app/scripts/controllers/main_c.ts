@@ -20,7 +20,7 @@ module  Todo {
 	newTitle = '';
 
 	/*
-	this commented out code is the 'old' method, ie. not using controller as
+	this commented out code is the 'old' method, ie. not using 'controller as'
 
 
 	static $inject = ['$scope', 'DMMethods'];	// allows safe minification
