@@ -1,11 +1,10 @@
 /// <reference path="../../../tsdefs/angularjs/angular.d.ts"/>
 /// <reference path="../common/todoItem.ts"/>
-/// <reference path="./datamodel_s.ts"/>
 'use strict';
 var Todo;
 (function (Todo) {
     /**
-    * A class containing all of the method which operate on the Todo data model
+    * A class that implements local storage
     */
     var LocalStorage = (function () {
         function LocalStorage(als) {

@@ -1,11 +1,10 @@
 /// <reference path="../../../tsdefs/angularjs/angular.d.ts"/>
 /// <reference path="../common/todoItem.ts"/>
-/// <reference path="./datamodel_s.ts"/>
 'use strict';
 
 module  Todo {
 /**
-* A class containing all of the method which operate on the Todo data model
+* A class that implements local storage
 */
   export class LocalStorage{
 	sig = 'LocalStorage';				// I always do this to help debugging DI, and as my first test
