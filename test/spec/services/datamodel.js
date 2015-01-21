@@ -19,4 +19,10 @@ describe('Service: Data', function () {
     expect(Data.sig).toBe('Data');
   });
 
+ it('should have an array of Todo items', function () {
+    var len = Data.allTodoItemsArray.length;
+    expect(len > -1).toBe(true);
+  });
+
+
 });

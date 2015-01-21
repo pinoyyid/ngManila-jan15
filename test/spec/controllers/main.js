@@ -16,7 +16,8 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.vmm.sig).toBe('MainCtrl');
+  it('should have the correct sig ', function () {
+//    expect(scope.vmm.sig).toBe('MainCtrl');
+    expect(MainCtrl.sig).toBe('MainCtrl');
   });
 });
