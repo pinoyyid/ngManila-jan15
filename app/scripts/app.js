@@ -15,7 +15,8 @@ angular
     'ngMessages',
     'ngResource',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'LocalStorageModule'     // added for local storage
   ])
   .config(function ($routeProvider) {
     $routeProvider
