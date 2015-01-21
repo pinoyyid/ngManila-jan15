@@ -21,7 +21,7 @@ var SLIDE_CONFIG = {
   // Author information
   presenters: [{
     name: 'Roy Smith',
-    gplus: 'goo.gl/6klp8l',
+    gplus: 'http://goo.gl/6klp8l',
     github: 'http://github.com/pinoyyid'
   }/*, {
     name: 'Second Name',
