@@ -3,7 +3,8 @@
 /// <reference path="./datamodel_s.ts"/>
 'use strict';
 
-module  Todo {
+
+module Todo {
 /**
 * A class containing all of the method which operate on the Todo data model
 */
@@ -20,16 +21,17 @@ module  Todo {
 
 	
 	/**
-	* Create a new todo item
+	* Create a new todo item 
 	* @param title  the title of the new item
 	* @return the newly created todo item
 	*/
-	newTodo(title:string):Todo {
+	newTodo(title:string):Todo {  
 		var newTodo = new Todo();
 		newTodo.id = new Date().valueOf();
 		newTodo.title = title;
 		this.datamodel.allTodoItemsArray.push(newTodo);
 		this.datamodel.allTodoItemsMap[newTodo.id] = newTodo;
+
 		return newTodo;
 	}
 

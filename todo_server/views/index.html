@@ -1,0 +1,22 @@
+<h1>ngTodo - test server</h1>
+
+<p>
+This is the companion server to the ngManila ToDo app.<br>
+This server provides two REST methods to save a new Todo item and to return a list of Todo items
+</p>
+<h3>NB. The server has no persistence. This means that although it will return a success 200, the new Task item has NOT been saved, and a subsequent list will always return the same test data<h3>
+
+    <br>
+    <h2>Insert a new Task</h2>
+    <p>Make a POST to <b>/tasks/v1/lists/tasklist/tasks</b> . The POST body should be a JSON object containing a "title" property. Any other properties are ignored.<br>
+    On success, the object will be echoed back with a populated "id" property.
+    See also <a href="https://developers.google.com/google-apps/tasks/v1/reference/tasks/insert">https://developers.google.com/google-apps/tasks/v1/reference/tasks/insert</a>
+    </p>
+
+    <br>
+    <h2>List Tasks</h2>
+    <p>Make a GET to <b>/tasks/v1/lists/tasklist/tasks</b> . 
+    On success, an object will be echoed back which contains an "items" property which is a list of Tasks<br>
+    See also <a href="https://developers.google.com/google-apps/tasks/v1/reference/tasks/list">https://developers.google.com/google-apps/tasks/v1/reference/tasks/list</a>
+    </p>
+
