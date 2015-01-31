@@ -11,13 +11,30 @@ module Todo {
   export class DMMethods {
 	sig = 'DMMethods';				// I always do this to help debugging DI, and as my first test
 	datamodel:Data;					// the in-memory data model
+	ls;
 
-	static $inject = ['Data'];			// Angular will inject the Data model service
-	constructor(Data) {
+	static $inject = ['Data','LocalStorage'];			// Angular will inject the Data model service
+	constructor(Data, LocalStorage) {
 		this.datamodel = Data;			// store the reference to the data model
+		this.ls = LocalStorage;			// store the reference to the data model
+		
+		// initialise from local storage
+		this.datamodel.allTodoItemsArray = this.ls.load();
+		if (!this.datamodel.allTodoItemsArray) {
+		    this.datamodel.allTodoItemsArray = [];
+		}
+		this.buildMapFromArray();
 	}
 
-
+    /**
+     * Iterate the todo items array and build the map
+     */
+    buildMapFromArray() {
+        for (var i = 0 ; i < this.datamodel.allTodoItemsArray.length ; i++) {
+            var todo:Todo = this.datamodel.allTodoItemsArray[i];
+            this.datamodel.allTodoItemsMap[todo.id] = todo;
+        }
+    }
 	
 	/**
 	* Create a new todo item 
@@ -30,7 +47,7 @@ module Todo {
 		newTodo.title = title;
 		this.datamodel.allTodoItemsArray.push(newTodo);
 		this.datamodel.allTodoItemsMap[newTodo.id] = newTodo;
-
+      	        this.ls.save(this.datamodel.allTodoItemsArray);
 		return newTodo;
 	}
 
@@ -42,6 +59,7 @@ module Todo {
 	*/
 	markTodoAsComplete(todoItem:Todo) {
 		todoItem.dateCompleted = new Date().toISOString();
+	    this.ls.save(this.datamodel.allTodoItemsArray);
 	}
 
 
