@@ -43,7 +43,7 @@ module Todo {
 	*/
 	newTodo(title:string):Todo {  
 		var newTodo = new Todo();
-		newTodo.id = new Date().valueOf();
+		newTodo.id = "id" + new Date().valueOf();
 		newTodo.title = title;
 		this.datamodel.allTodoItemsArray.push(newTodo);
 		this.datamodel.allTodoItemsMap[newTodo.id] = newTodo;

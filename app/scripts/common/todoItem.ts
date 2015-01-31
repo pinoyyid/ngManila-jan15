@@ -6,7 +6,7 @@
 
 module  Todo {	    					// each class is defined within the Todo module
   export class Todo {
-	id: 		    number;
+	id: 		    string;
 	title: 		    string;
 	dateCreated: 	string;		
 	dateCompleted:	string;				// undefined for an incomplete Todo item. Good idea??

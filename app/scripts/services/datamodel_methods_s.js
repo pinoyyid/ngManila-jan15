@@ -35,7 +35,7 @@ var Todo;
         */
         DMMethods.prototype.newTodo = function (title) {
             var newTodo = new Todo.Todo();
-            newTodo.id = new Date().valueOf();
+            newTodo.id = "id" + new Date().valueOf();
             newTodo.title = title;
             this.datamodel.allTodoItemsArray.push(newTodo);
             this.datamodel.allTodoItemsMap[newTodo.id] = newTodo;
