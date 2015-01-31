@@ -11,7 +11,7 @@ module  Todo {
 
 	constructor() {
 		// load some test data. In a real world app, there would be mock versions of this class
-		var t;
+		var t:Todo;
 		t = new Todo(); t.title = 'title 1'; this.allTodoItemsArray.push(t);
 		t = new Todo(); t.title = 'title 2'; this.allTodoItemsArray.push(t);
 		t = new Todo(); t.title = 'title 3'; this.allTodoItemsArray.push(t);

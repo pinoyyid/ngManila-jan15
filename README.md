@@ -14,4 +14,9 @@ You will need :-
 - [ ] bower
 - [ ] typescript. This is technically optional, in which case you will be editing the .js files and ignoring the .ts files. NB. this is a really bad idea. You are much better served by using the project as a way to get into typescript.
 
-
+## Installation
+ - git clone https://github.com/pinoyyid/ngManila-jan15    # downloads the repo
+ - cd ngManila-jan15                                       # cd into the newly created dir
+ - unzip deps.zip                                          # unzip the node_modules and bower_compnents
+ - mv bower_components app                                 # move bower_components into the correct position
+ 

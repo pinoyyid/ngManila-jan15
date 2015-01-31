@@ -4,10 +4,10 @@
 *   The definition of the Todo object that will be used throughout the app
 */
 
-module  Todo {						// each class is defined within the Todo module
+module  Todo {	    					// each class is defined within the Todo module
   export class Todo {
-	id: 		number;
-	title: 		string;
+	id: 		    number;
+	title: 		    string;
 	dateCreated: 	string;		
 	dateCompleted:	string;				// undefined for an incomplete Todo item. Good idea??
 
