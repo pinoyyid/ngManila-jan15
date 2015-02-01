@@ -1,3 +1,5 @@
+#WARNING: as it stands, I don't guarantee that grunt is correctly packaged in this repo. If it works, great, but if not, I suggest running with pyhthon -m SimpleHTTPServer 
+
 # ngManila-jan15
 Sample code from Anatomy presentation.
 
