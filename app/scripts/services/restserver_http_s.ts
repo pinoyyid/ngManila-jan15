@@ -9,13 +9,13 @@ module Todo {
 
     export class RestServer {
         sig = 'RestServer'; // I always do this to help debugging DI, and as my first test
-        TASKLIST_ID = 'clevernotre.demo task list id'
+        TASKLIST_ID = 'MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA';
         http: ng.IHttpService;
 
 
         //URL = "/tasks/v1/lists/tasklist/tasks"; // local test server URL on sme server
-        URL = "http://localhost:8080/tasks/v1/lists/tasklist/tasks"; // local test server URL on different server
-        //URL = "https://www.googleapis.com/tasks/v1/lists/"+TASKLIST_ID+"/tasks"; // local test server URL on different server
+        //URL = "http://localhost:8080/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks"; // local test server URL on different server
+        URL = "https://www.googleapis.com/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks"; // Google tasks
 
         static $inject = ['$http']; // Angular will inject the Data model service
         constructor($http) {
@@ -33,7 +33,7 @@ module Todo {
          * @return the access token string
          */
         getAccessToken(): string {
-            return "foo";
+            return "ya29.DgEwFu3BiRl49KnUdfvHX07GkrlpeTrHZ-ytE5dZGiMAXipcpiyuiT4e7n_q7N7lul_ktOmEviR0pA";
         }
 
 
@@ -43,7 +43,7 @@ module Todo {
         insert(todo: Todo, retryCounter ? : number): ng.IHttpPromise < any > {
             // post returns a promise. Assign it to a var so we can define an error function here
             // and also pass the promise to the caller to deal with success
-            var promise = this.http.post(this.URL, todo);
+            var promise = this.http.post(this.URL, {"title":todo.title});
             // deal with errors, eg authentication, retry with exponential backoff, report to user, etc
             promise.error((data, status, headers, config) => {
                     if (status == 401) {
@@ -64,7 +64,7 @@ module Todo {
          * logic is mich the same as insert
          */
         update(todo: Todo, retryCounter ? : number): ng.IHttpPromise < any > {
-            var promise = this.http.put(this.URL, todo);
+          var promise = this.http.put(this.URL+'/'+todo.id, todo);
             promise.error((data, status, headers, config) => {
                 if (status == 401) {
                     console.warn("Need to acquire a new Access Token and resubmit");

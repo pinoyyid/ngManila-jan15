@@ -14,10 +14,11 @@ module NgTodo {
 
             // ROUTES 
             this.app.use(this.express.static(this.path.join(__dirname, '../app'))); //  "public" off of current is root
-            this.app.get('/tasks/v1/lists/tasklist/tasks', this.getList);
-            this.app.post('/tasks/v1/lists/tasklist/tasks', this.postInsert);
-            this.app.put('/tasks/v1/lists/tasklist/tasks', this.postInsert);
-            this.app.options('/tasks/v1/lists/tasklist/tasks', this.options);
+            this.app.get('/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks', this.getList);
+            this.app.post('/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks', this.postInsert);
+            this.app.put('/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks/*', this.postInsert);
+            this.app.patch('/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks/*', this.postInsert);
+            this.app.options(/.*/, this.options);
 
 
             this.app.listen(this.PORT);

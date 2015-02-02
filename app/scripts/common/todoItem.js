@@ -6,6 +6,7 @@ var Todo;
 (function (_Todo) {
     var Todo = (function () {
         function Todo() {
+            this.status = 'needsAction'; // 'completed' or 'needsAction'
         }
         return Todo;
     })();

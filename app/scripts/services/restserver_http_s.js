@@ -9,9 +9,10 @@ var Todo;
     var RestServer = (function () {
         function RestServer($http) {
             this.sig = 'RestServer'; // I always do this to help debugging DI, and as my first test
-            this.TASKLIST_ID = 'clevernotre.demo task list id';
+            this.TASKLIST_ID = 'MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA';
             //URL = "/tasks/v1/lists/tasklist/tasks"; // local test server URL on sme server
-            this.URL = "http://localhost:8080/tasks/v1/lists/tasklist/tasks"; // local test server URL on different server
+            //URL = "http://localhost:8080/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks"; // local test server URL on different server
+            this.URL = "https://www.googleapis.com/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks"; // Google tasks
             this.http = $http;
             // set a default Authorization header to include an access token from somewhere
             $http.defaults.headers.common.Authorization = 'Bearer ' + this.getAccessToken();
@@ -23,7 +24,7 @@ var Todo;
          * @return the access token string
          */
         RestServer.prototype.getAccessToken = function () {
-            return "foo";
+            return "ya29.DgEwFu3BiRl49KnUdfvHX07GkrlpeTrHZ-ytE5dZGiMAXipcpiyuiT4e7n_q7N7lul_ktOmEviR0pA";
         };
         /**
          * Insert a new Task by POSTing to Task endpoint
@@ -32,7 +33,7 @@ var Todo;
             var _this = this;
             // post returns a promise. Assign it to a var so we can define an error function here
             // and also pass the promise to the caller to deal with success
-            var promise = this.http.post(this.URL, todo);
+            var promise = this.http.post(this.URL, { "title": todo.title });
             // deal with errors, eg authentication, retry with exponential backoff, report to user, etc
             promise.error(function (data, status, headers, config) {
                 if (status == 401) {
@@ -53,7 +54,7 @@ var Todo;
          */
         RestServer.prototype.update = function (todo, retryCounter) {
             var _this = this;
-            var promise = this.http.put(this.URL, todo);
+            var promise = this.http.put(this.URL + '/' + todo.id, todo);
             promise.error(function (data, status, headers, config) {
                 if (status == 401) {
                     console.warn("Need to acquire a new Access Token and resubmit");
@@ -83,7 +84,6 @@ var Todo;
             });
             return promise;
         };
-        //URL = "https://www.googleapis.com/tasks/v1/lists/"+TASKLIST_ID+"/tasks"; // local test server URL on different server
         RestServer.$inject = ['$http']; // Angular will inject the Data model service
         return RestServer;
     })();

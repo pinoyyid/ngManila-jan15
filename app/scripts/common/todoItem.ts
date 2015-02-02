@@ -9,6 +9,7 @@ module  Todo {	    					// each class is defined within the Todo module
 	id:             string;
 	title: 		string;
 	dateCreated: 	string;		
-	completed:	string;				// undefined for an incomplete Todo item. Good idea??
-  }
+	completed:	string;				// undefined for an incomplete Todo item. 
+        status:         string = 'needsAction';         // 'completed' or 'needsAction'
+        }
 }

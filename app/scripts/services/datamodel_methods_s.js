@@ -78,7 +78,7 @@ var Todo;
          * @param Todo item
          */
         DMMethods.prototype.markTodoAsComplete = function (todoItem) {
-            todoItem.completed = new Date().toISOString(); // mark complete by setting the date
+            todoItem.status = 'completed';
             this.ls.save(this.datamodel.allTodoItemsArray); // save to local storage
             this.rest.update(todoItem); // save to the server  REST
         };
@@ -100,7 +100,7 @@ var Todo;
          * return truthy if the Todo item is complete
          */
         DMMethods.prototype.isComplete = function (todo) {
-            return !!todo.completed;
+            return todo.status == 'completed';
         };
         DMMethods.$inject = ['Data', 'LocalStorage', 'RestServer'];
         return DMMethods;

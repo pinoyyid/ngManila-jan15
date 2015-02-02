@@ -88,7 +88,7 @@ module Todo {
          * @param Todo item
          */
         markTodoAsComplete(todoItem: Todo) {
-            todoItem.completed = new Date().toISOString(); // mark complete by setting the date
+            todoItem.status = 'completed';
             this.ls.save(this.datamodel.allTodoItemsArray); // save to local storage
             this.rest.update(todoItem); // save to the server  REST
         }
@@ -115,7 +115,7 @@ module Todo {
          * return truthy if the Todo item is complete
          */
         isComplete(todo: Todo): boolean {
-            return !!todo.completed;
+            return todo.status == 'completed';
         }
 
         // delete Todo,  etc
