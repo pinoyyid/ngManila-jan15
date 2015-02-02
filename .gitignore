@@ -4,7 +4,7 @@ node_modules
 dist
 .tmp
 .sass-cache
-bower_components
+Zbower_components
 *.swp
 *.swo
 *~
