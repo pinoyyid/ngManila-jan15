@@ -11,11 +11,17 @@ var Todo;
      */
     var DMMethods = (function () {
         function DMMethods(Data, LocalStorage, RestServer) {
-            var _this = this;
             this.sig = 'DMMethods'; // I always do this to help debugging DI, and as my first test
             this.datamodel = Data; // store the reference to the data model
             this.ls = LocalStorage; // store the reference to the LocalStorage service
             this.rest = RestServer; // store the reference to the REST service        // REST
+            this.loadModel();
+        }
+        /**
+        * load the data model from local storage. If no local storage, load from rest server
+        */
+        DMMethods.prototype.loadModel = function () {
+            var _this = this;
             // try to initialise from local storage
             this.datamodel.allTodoItemsArray = this.ls.load();
             if (this.datamodel.allTodoItemsArray) {
@@ -30,7 +36,7 @@ var Todo;
                     _this.buildMapFromArray(); // still need to build map
                 });
             }
-        }
+        };
         /**
          * Iterate the todo items array and build the map
          */

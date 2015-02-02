@@ -22,6 +22,13 @@ module Todo {
             this.ls = LocalStorage; // store the reference to the LocalStorage service
             this.rest = RestServer; // store the reference to the REST service        // REST
 
+            this.loadModel();
+        }
+
+        /**
+        * load the data model from local storage. If no local storage, load from rest server
+        */
+        loadModel() {
             // try to initialise from local storage
             this.datamodel.allTodoItemsArray = this.ls.load();
             if (this.datamodel.allTodoItemsArray) {
@@ -35,6 +42,7 @@ module Todo {
                     this.buildMapFromArray(); // still need to build map
                 });
             }
+
         }
 
         /**
