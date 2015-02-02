@@ -95,7 +95,6 @@ module Todo {
             })
             return promise;
         }
-
     }
 }
 

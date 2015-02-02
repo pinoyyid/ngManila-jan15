@@ -13,7 +13,7 @@ module Todo {
     export class DMMethods {
         sig = 'DMMethods'; // I always do this to help debugging DI, and as my first test
         datamodel: Data; // the in-memory data model
-        ls: Todo.LocalStorage;
+        ls: LocalStorage;
         rest: RestServer; // REST
 
         static $inject = ['Data', 'LocalStorage', 'RestServer'];
@@ -63,8 +63,9 @@ module Todo {
             this.datamodel.allTodoItemsArray.push(newTodo);
             this.datamodel.allTodoItemsMap[newTodo.id] = newTodo;
             // save to rest server
-            // we'll capture the returned promise in a var, but ...
-            // often written as this.rest.insert(newTodo).success().error() in examples, but not in real life;
+            // we'll capture the returned promise in a var, you will see this
+            // often written as this.rest.insert(newTodo).success().error() in examples, but not in real life because errors and success are 
+            // usually dealt with in different parts of the app
             var promise = this.rest.insert(newTodo); // REST
             // on success, we need to re-store the item with its new server-generated id
             promise.success((restTodo: Todo) => {
@@ -87,9 +88,9 @@ module Todo {
          * @param Todo item
          */
         markTodoAsComplete(todoItem: Todo) {
-            todoItem.completed = new Date().toISOString();
-            this.ls.save(this.datamodel.allTodoItemsArray);
-            this.rest.update(todoItem); // REST
+            todoItem.completed = new Date().toISOString(); // mark complete by setting the date
+            this.ls.save(this.datamodel.allTodoItemsArray); // save to local storage
+            this.rest.update(todoItem); // save to the server  REST
         }
 
 
