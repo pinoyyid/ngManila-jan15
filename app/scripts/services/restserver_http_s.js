@@ -11,8 +11,7 @@ var Todo;
             this.sig = 'RestServer'; // I always do this to help debugging DI, and as my first test
             this.TASKLIST_ID = 'MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA';
             //URL = "/tasks/v1/lists/tasklist/tasks"; // local test server URL on sme server
-            //URL = "http://localhost:8080/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks"; // local test server URL on different server
-            this.URL = "https://www.googleapis.com/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks"; // Google tasks
+            this.URL = "http://localhost:8080/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks"; // local test server URL on different server
             this.http = $http;
             // set a default Authorization header to include an access token from somewhere
             $http.defaults.headers.common.Authorization = 'Bearer ' + this.getAccessToken();
@@ -33,7 +32,9 @@ var Todo;
             var _this = this;
             // post returns a promise. Assign it to a var so we can define an error function here
             // and also pass the promise to the caller to deal with success
-            var promise = this.http.post(this.URL, { "title": todo.title });
+            var promise = this.http.post(this.URL, {
+                "title": todo.title
+            });
             // deal with errors, eg authentication, retry with exponential backoff, report to user, etc
             promise.error(function (data, status, headers, config) {
                 if (status == 401) {
@@ -84,6 +85,7 @@ var Todo;
             });
             return promise;
         };
+        //URL = "https://www.googleapis.com/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks"; // Google tasks
         RestServer.$inject = ['$http']; // Angular will inject the Data model service
         return RestServer;
     })();
