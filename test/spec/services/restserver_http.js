@@ -24,7 +24,7 @@ describe('Service: RestServer', function () {
      authRequestHandlerGet = $httpBackend.when('GET', '')
                             .respond({kind: 'tasks#tasks'}, {'A-Token': 'xxx'});
      authRequestHandlerPost = $httpBackend.when('POST', '')
-                            .respond({id:'id',title:'title'});
+                            .respond(200,{id:'id_from_mock_httpbackend',title:'title'});
  }));
 
   beforeEach(inject(function (_RestServer_) {
@@ -58,6 +58,7 @@ describe('Service: RestServer', function () {
 
 
    it('insert should call POST on the tasks endpoint', function() {
+     console.log("test insert");
      $httpBackend.expectPOST("http://localhost:8080/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks");
      RestServer.insert({title:'foo'});
      $httpBackend.flush();

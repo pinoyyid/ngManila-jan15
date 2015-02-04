@@ -37,6 +37,7 @@ var Todo;
             });
             // deal with errors, eg authentication, retry with exponential backoff, report to user, etc
             promise.error(function (data, status, headers, config) {
+                console.warn("insert: error " + status);
                 if (status == 401) {
                     console.warn("Need to acquire a new Access Token and resubmit");
                     //TODO fetch an access token from somewhere
