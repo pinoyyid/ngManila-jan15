@@ -1,0 +1,557 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ngManila - Feb 2015 code camp</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+<slide>
+    <hgroup>
+      <h2>Setup</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>dev console as clevernote.demo</li>      
+        <li>oauth2 playground and get access token</li>      
+        <li><a href="http://192.168.1.105:3131/workspace/app/index.html#/">Todo</a></li>      
+        <li><a href="http://www.typescriptlang.org/Playground">ts - modules</a></li>      
+        <li><a href="http://192.168.1.105:3131">c9</a></li>      
+        <li><a href="http://192.168.1.105:3131/workspace/presentations/pres1/p1.html">pres -> structure</a></li>      
+        <li><a href=" https://github.com/pinoyyid/ngManila-jan15">github</a></li>      
+      </ul>
+    </article>
+  </slide>
+
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Agenda</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Welcome</li>      
+        <li>Recap of Todo app</li>
+        <li>Description of mission, should you choose to accept it</li>
+        <li>Getting the code, dev environment</li>
+        <li>Presentation</li>
+	<ul>
+		<li>JavaScript async and promises</li>
+	        <li>REST cooked three ways</li>
+	</ul>
+        <li>Ready, steady ... code</li>
+        <li>Solution presentation and discussion</li>
+      </ul>
+    </article>
+  </slide>
+  
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>The Todo application</h2>
+      <h3>... because the world needs more Todo apps</h3>
+    </hgroup>
+  </slide>
+
+
+  <slide>
+    <hgroup>
+      <h2>Todo Application structure</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <img  src="images/files2.png" alt="Description" title="Description">
+    </article>
+  </slide>
+
+ 
+ <slide>
+    <hgroup>
+      <h2>Tonight's intro mission <br>(the one the movie always starts with)<br></h2>
+      </hgroup>
+    <article>
+        <li>Instantiate a dev environment with the Todo app<br></li>      
+      <ul class="build">
+      <li>Configure dev.clevernote.co (needed for Google Tasks) in /etc/hosts or %WinDir%\System32\Drivers\Etc\hosts</li>
+      <li>Connect to WiFi 1, password BeTheFuture</li>
+      <li>Browse to this presentation</li>
+      <li>For local working git clone https://github.com/pinoyyid/ngManila-jan15, <br>or browse to dev.clevernote.co:3131 and take a letter</li>
+      <li>Decide if you want to use the .ts or .js files. If .ts, you probably want to use the cloud IDE rather than spend time setting up your own TypeScript environment</li>
+      </ul>
+    </article>
+  </slide>
+ 
+  <slide>
+    <hgroup>
+      <h2>Tonight's main mission<br> (the spine of the movie)<br></h2>
+      </hgroup>
+    <article>
+        <li>To add REST storage and retrieval of Tasks using the local test server<br></li>      
+      <ul class="build">
+      <li>Choose one of $http, $resource, Restangular</li>
+      <li>Implement inserting a new Task</li>
+      <li>Deal with a 401 exception (meaning missing authentication header)</li>
+      <li>Implement updating a Task to mark it as complete</li>
+      <li>Implement downloading the Tasks if localstorage is empty</li>
+      </ul>
+    </article>
+  </slide>
+ 
+ 
+   <slide>
+    <hgroup>
+      <h2>Test Server details</h2>
+      </hgroup>
+    <article style="line-height: 1.5em;margin-top:0.2em;font-size:18px">
+        <li>The test server is running at http://dev.clevernote.co:8080</li>
+	<li>It follows the <a href='https://developers.google.com/google-apps/tasks/v1/reference/tasks'>Google Tasks API</a> </li>
+        <li>Insert: POST to <br>http://dev.clevernote.co:8080/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks</li>
+        <li>... a successful Insert will return 200 and a Todo object with a server allocated ID</li>
+        <li>Update: PUT to http://dev.clevernote.co:8080/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks/{TASK_ID}</li>
+        <li>... a successful Update will return 200 and the new Todo object</li>
+        <li>List: GET to http://dev.clevernote.co:8080/tasks/v1/lists/MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA/tasks</li>
+        <li>... a succesful List will return an object, which contains an items:array<br>
+            <pre>{kind:"tasks#tasks", items:[{id:"id1", title:"title-1"},{id:"id1", title:"title-1"}]}</pre>
+        </li>    
+        <li>All requests must contain an HTTP Authorization header, thus:-<br>
+            Authorization: Bearer access_token<br>
+            For the test server, the access_token can be anything. For Google it needs to be a valid token which will be provided for you. The server will respond with a 401 if the token is missing or malformed.
+
+        </li>
+    </article>
+  </slide>
+ 
+ 
+ <slide>
+    <hgroup>
+      <h2>Tonight's bonus mission<br> (the bit where you go maverick and save the world)<br></h2>
+      </hgroup>
+    <article>
+        <li>To store and retrieve Tasks in Google Tasks, plus more 'real world' stuff<br></li>      
+      <ul class="build">
+      <li>Convert to use Google Tasks (should be no more than setting the correct access token and URL)<br>
+          <a href='https://developers.google.com/google-apps/tasks/v1/reference/tasks'>Google Tasks API</a><br>
+          tasklist id = MDM4NjIwODI0NzAwNDQwMjQ2MjU6OTEzMzE4NTkxOjA<br>
+          OAuth Access Token = tba
+      </li>
+      <li>Add feedback to the user with a loading/saving/error crouton</li>
+      <li>Deal with paginated output (ie. presence of nextPageToken)</li>
+      <li>deal with 'offline mode', ie. update localstorage then sync when online. sync needs to deal with ngTodo localstorage to Google *and* Google to ngTodo</li>
+      </ul>
+    </article>
+  </slide>
+
+
+ 
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Consuming REST services in AngularJS</h2>
+    </hgroup>
+  </slide>
+
+
+
+
+   <slide>
+    <hgroup>
+      <h2>You can't do REST without understanding 'promises'</h2>
+    </hgroup>
+    <article>
+      <ul >
+        <li>Angular is async, non-blocking. You knew that right?</li>
+	<pre class="prettyprint" data-lang="java">
+    // sleep for 1s then say hello
+    Thread.sleep(1000);                      // 1
+    System.out.println("Hello at last");     // 2
+    String foo="bar";                        // 3
+    System.out.println(foo);                 // 4  displays "bar"
+    </pre>
+    <pre class="prettyprint" data-lang="javascript">
+    // sleep for 1s then say hello
+    setTimeout(function() {                    // 1
+        console.log("Hello at last")           // 3
+    	var foo = "bar";                       // 4
+        }
+    , 1000);
+    console.log(foo);                          // 2  displays "undefined"
+	</pre>
+      </ul>
+    </article>
+  </slide>
+
+
+
+
+   <slide>
+    <hgroup>
+      <h2>Example, what would the JavaScript for this problem look like?</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	      <li>  wait 1 second<br>
+	      then fetch the current temperature (A)<br>
+	      then wait 1 minute<br>
+	      then fetch the current temperature (B)<br>
+	      then wait 1 second<br>
+	      then display the average temperature (A+B/2)<br>
+						     </li>
+      </ul>
+    </article>
+  </slide>
+
+
+
+
+
+   <slide>
+    <hgroup>
+      <h2>Example, what would the traditional JavaScript for this problem look like?</h2>
+    </hgroup>
+    <article>
+	<pre class="prettyprint" data-lang="javascript">
+ setTimeout(
+      function() {
+          self.getTemp('A', function() {
+              console.log('sleeping for 1m (6000ms)');
+              setTimeout(
+                  function() {
+                      self.getTemp('B',
+                          function() {
+                              console.log('sleeping for 1s');
+                              setTimeout(function() {
+                                  console.log('average temp over last minute is ' + ((window['A'] + window['B']) / 2));
+                              }, 1000);   // alice
+                          })
+                  }, 60000);
+          })
+      }, 1000);   // bob
+	</pre>
+      </ul>
+    </article>
+  </slide>
+
+
+
+
+   <slide>
+    <hgroup>
+      <h2>JavaScript using promises</h2>
+    </hgroup>
+    <article>
+      <ul >
+	      <li>  wait 1 second<br>
+	      then fetch the current temperature (A)<br>
+	      then wait 1 minute<br>
+	      then fetch the current temperature (B)<br>
+	      then wait 1 second<br>
+	      then display the average temperature (A+B/2)<br>
+						     </li>
+      </ul>
+	<pre class="prettyprint" data-lang="javascript">
+this.sleep(1000)
+  .then(() => { return this.getTempPromise('A') })
+  .then(() => { return this.sleep(60000) })
+  .then(() => { return this.getTempPromise('B') })
+  .then(() => { return this.sleep(1000) })
+  .then(() => { console.log('average temp over last minute is ' + ((window['A'] + window['B']) / 2)); })
+
+
+	</pre>
+      </ul>
+    </article>
+  </slide>
+
+
+
+   <slide>
+    <hgroup>
+      <h2>Wow, that's so call. Teach me how!</h2>
+    </hgroup>
+    <article>
+      <ul >
+	      <li>Here is how setTimeout can be wrapped by a promise. </li>
+	      <li>If you understand this, you're 90% done.</li>
+      </ul>
+	<pre class="prettyprint" data-lang="javascript">
+/**
+* sleep then resolve promise
+* @param ms the number of ms to sleep for
+* @return a promise
+*/
+sleep(ms: number):ng.IPromise {
+  console.log('sleeping for  ' + ms + 'ms');
+  var deferred = this.q.defer();			// 1. create the deferred object
+  setTimeout(() => {
+     deferred.resolve();				// 3. call 'resolve' on the deferred object when the activity completes
+  }, ms);
+ return deferred.promise;				// 2. return the deferred object's promise
+}
+	</pre>
+      </ul>
+    </article>
+  </slide>
+
+
+  
+
+
+   <slide>
+    <hgroup>
+    <h2>AngularJS REST. Three common mechanisms <br>(all of which use promises)</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li><b>$http</b> - Built into core AngularJS</li>      
+        <li><b>$resource</b> - An AngularJS optional module</li>      
+        <li><b>Restangular</b> - A third party library</li>      
+      </ul>
+    </article>
+  </slide>
+  
+
+
+
+
+   <slide>
+    <hgroup>
+      <h2>$http</h2>
+    </hgroup>
+    <article>
+      <ul >
+	      <li>Core Angular. Everything else ultimately calls $http</li>
+      </ul>
+	<pre class="prettyprint" data-lang="javascript">
+  function newTodo(title:string) {
+  var promise = $http.post(someURL, {
+     "title": title
+  });
+  promise.error((data, status, headers, config) => {
+    if (status == 401) {
+       console.warn("Need to acquire a new Access Token and resubmit");
+       }
+  }
+  return promise;
+ }
+
+ newTodo("Pay Meralco")
+  .success( function (serverResponse) {i
+       console.log('The id of our newly created Task is '+serverResponse.id)
+  });
+	</pre>
+      </ul>
+    </article>
+  </slide>
+
+
+  
+
+
+   <slide>
+    <hgroup>
+      <h2>$http, advanced features</h2>
+    </hgroup>
+    <article>
+      <ul >
+	      <li>Setting a default HTTP header for all $http calls</li>
+      </ul>
+	<pre class="prettyprint" data-lang="javascript">
+
+  $http.defaults.headers.common.Authorization = 'Bearer ' + this.getAccessToken();
+	</pre>
+      </ul>
+    </article>
+  </slide>
+
+
+
+
+   <slide>
+    <hgroup>
+      <h2>$http, advanced features</h2>
+    </hgroup>
+    <article>
+      <ul >
+	      <li>Adding an interceptor</li>
+      </ul>
+	<pre class="prettyprint" data-lang="javascript">
+// register the interceptor as a service
+$provide.factory('myHttpInterceptor', function($q, dependency1, dependency2) { return {  // all functions are optional
+     'request': function(config) {		// called prior to each request
+       return config; },
+      'requestError': function(rejection) {         // rarely used
+        if (canRecover(rejection)) {
+            return responseOrNewPromise
+        } return $q.reject(rejection); },
+      'response': function(response) {            // called after each success
+         return response; },
+      'responseError': function(rejection) {	// called after each error
+        if (canRecover(rejection)) {
+          return responseOrNewPromise
+        } return $q.reject(rejection); }
+  }; });
+  // add your interceptor to the interceptors array
+  $httpProvider.interceptors.push('myHttpInterceptor');
+</pre>
+      </ul>
+    </article>
+  </slide>
+
+
+
+   <slide>
+    <hgroup>
+      <h2>ngResource</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+	      <li>No longer core Angular, so need to &lt;script&gt; angular-resource.js and declare module to app</li>      
+        <li>Handles URL mangling from a base URL, eg. /tasks/v1/lists/:tasklistId/task/:taskId</li>      
+	<li>... based on assumptions about how a REST URL is constructed</li>
+      	<li>Turns plain old model objects into $resource objects with added REST methods</li>
+	<pre>var User = $resource('/user/:userId', {userId:'@id'});
+	User.get({userId:123}, function(user) {
+	  user.abc = 'foo';
+	  user.$save();
+	});</pre>      
+      	<li>Ughhh. Cute for toy apps, but no place in the real world</li>
+      </ul>
+    </article>
+  </slide>
+  
+
+
+
+
+   <slide>
+    <hgroup>
+      <h2>Restangular</h2>
+    </hgroup>
+    <article>
+      <ul class="build">
+        <li>Third party OSS</li>      
+        <li>Keeps track of relationships, state, etag, etc by adding properties to the model objects</li>      
+        <li>For me, this is an anti-pattern. </li>      
+	<li><a href="https://www.youtube.com/watch?v=fWar75R1NGo">Restangular 2 presentation from ngEurope</a></li>      
+        <li>Restangular 1 "fixes the problems with ngResource"</li>      
+        <li>Restangular 2 "fixes the problems with Restangular 1"</li>      
+	<img src="images/ra.png">
+      </ul>
+    </article>
+  </slide>
+  
+
+
+ 
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Real men use $http</h2>
+    </hgroup>
+  </slide>
+
+
+
+    
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Gentlement hackers, hack.</h2>
+      <h3>... using one of $http, $resource, Restangular</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Todo Application structure</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <img src="images/files2.png" alt="Description" title="Description">
+    </article>
+  </slide>
+
+
+<!--
+  <slide>
+    <hgroup>
+      <h2>Slide with Iframe</h2>
+    </hgroup>
+    <article>
+      <iframe data-src="http://www.google.com/doodle4google/resources/history.html"></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <article>
+      <iframe data-src="http://www.google.com/doodle4google/resources/history.html"></iframe>
+    </article>
+  </slide>
+-->
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/google_developers_icon_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>&lt;Thank You!&gt;</h2>
+      <p>roy.smith.esq@gmail.com</p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="logoslide dark nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/google_developers_logo_white.png"></span>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>

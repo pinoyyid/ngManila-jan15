@@ -7,7 +7,7 @@
 module  Todo {
 // Optional. Defines the contract between JS and HTML
   interface IMainCtrl {
-	sig:string					// [provide info for HTML designer here] eg...
+	sig:string;					// [provide info for HTML designer here] eg...
 	todoClicked:(todo:Todo)=>void;			// click event for the complete checkbox
 	newTitle:string;				// input text for new todo item title
   }
@@ -16,7 +16,6 @@ module  Todo {
   export class MainCtrl implements IMainCtrl {
 	sig = 'MainCtrl';				// I always do this to help debugging DI, and as my first test
 	dm:DMMethods;					// a reference to the DataModel Methods service
-
 	newTitle = '';
 
 	/*
